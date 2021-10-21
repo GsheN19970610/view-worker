@@ -1,0 +1,27 @@
+server:
+  port: 80
+
+spring:
+  application:
+    name: project_spring
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/gongdi?useSSL=false&serverTimezone=UTC&characterEncoding=utf-8&useUnicode=true
+    username: root
+    password: gsy12345
+    type: com.alibaba.druid.pool.DruidDataSource
+
+
+#mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.gsy.java2103.mapper
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+logging:
+  level:
+    com.gsy.java2103.mapper: debug
+

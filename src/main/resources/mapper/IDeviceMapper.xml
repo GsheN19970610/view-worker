@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gsy.java2103.mapper.IDeviceMapper">
+
+<!--    &lt;!&ndash;List<Place> findAll();&ndash;&gt;-->
+<!--    <select id="findAll" resultType="com.gsy.java2103.pojo.Place">-->
+<!--        select * from place-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash;Place findByPlaceId(Integer id);&ndash;&gt;-->
+<!--    <select id="findByPlaceId" resultType="com.gsy.java2103.pojo.Place">-->
+<!--        select * from place where place_id = #{placeId}-->
+<!--    </select>-->
+
+    <select id="findAll" resultType="com.gsy.java2103.pojo.Device">
+        SELECT
+            device_id AS deviceId,
+            device_name AS deviceName,
+            device_info AS deviceInto,
+            device_status AS deviceStatus,
+            device_price AS devicePrice,
+            place_name AS belongPlace
+        FROM
+            device,
+            place
+        WHERE belong_place = place_id
+    </select>
+
+
+
+    <select id="searchpage" resultType="java.util.Map">
+        SELECT
+            device_id,
+            device_name,
+            device_info,
+            device_status,
+            device_price,
+            place_name AS belongUser
+        FROM
+            device,
+            place
+        WHERE belong_place = place_id
+         AND device_name like concat('%',#{name},'%')
+    </select>
+
+
+    <select id="findpage" resultType="java.util.Map">
+        SELECT
+            device_id,
+            device_name,
+            device_info,
+            device_status,
+            device_price,
+            place_name AS belongPlace
+        FROM
+            device,
+            place
+        WHERE belong_place = place_id
+    </select>
+</mapper>

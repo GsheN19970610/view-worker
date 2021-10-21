@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gsy.java2103.mapper.IPlaceMapper">
+
+<!--    &lt;!&ndash;List<Place> findAll();&ndash;&gt;-->
+<!--    <select id="findAll" resultType="com.gsy.java2103.pojo.Place">-->
+<!--        select * from place-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash;Place findByPlaceId(Integer id);&ndash;&gt;-->
+<!--    <select id="findByPlaceId" resultType="com.gsy.java2103.pojo.Place">-->
+<!--        select * from place where place_id = #{placeId}-->
+<!--    </select>-->
+
+    <select id="findAll" resultType="com.gsy.java2103.pojo.Place" >
+        SELECT
+            place_id AS placeId,
+            place_name AS placeName,
+            place_info AS placeInfo,
+            place_num AS placeNum,
+            place_status AS placeStatus,
+            t.user_name AS belongUser
+        FROM
+            place p
+                INNER JOIN tb_user t
+                           ON p.belong_user = t.id
+            where id = #{id}
+    </select>
+
+
+    <select id="findpage" resultType="java.util.Map">
+        SELECT
+            place_id,
+            place_name,
+            place_info,
+            place_num,
+            place_status,
+            user_name
+        FROM
+            tb_user,
+            place
+        WHERE id = place.belong_user
+          AND id = 1
+    </select>
+    <select id="searchpage" resultType="java.util.Map">
+        SELECT
+            place_id,
+            place_name,
+            place_info,
+            place_num,
+            place_status,
+            user_name
+        FROM
+            tb_user,
+            place
+        WHERE id = place.belong_user
+          AND id = #{id} AND place_name like concat('%',#{name},'%')
+    </select>
+
+
+</mapper>

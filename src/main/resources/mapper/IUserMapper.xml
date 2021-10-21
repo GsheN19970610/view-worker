@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gsy.java2103.mapper.IUserMapper">
+
+
+
+    <!--User findByName(String name);-->
+    <select id="findByName" resultType="com.gsy.java2103.pojo.User">
+        SELECT
+            id,
+            user_name AS userName,
+            PASSWORD
+        FROM
+            tb_user
+        WHERE user_name = #{userName}
+    </select>
+
+    <!--      Integer save(User user);  -->
+    <insert id="save" parameterType="com.gsy.java2103.pojo.User">
+        INSERT INTO tb_user
+        VALUES
+        (#{userName},#{password})
+    </insert>
+</mapper>
